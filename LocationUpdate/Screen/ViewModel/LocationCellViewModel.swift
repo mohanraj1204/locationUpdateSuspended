@@ -34,6 +34,9 @@ extension LocationListCelViewModelImpl : LocationListCellViewModel {
         return obj.longitude?.description ?? ""
     }
     var time : String  {
-        return obj.time?.description ?? ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy  hh:mm a"
+        let dateInString = dateFormatter.string(from: (obj.time ?? Date()) as Date)
+        return dateInString
     }
 }

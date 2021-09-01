@@ -51,9 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         if let appDelegate = appDelegate,
            let loc = appDelegate.myLocation{
-            appDelegate.createRegion(location: loc)
-            let viewModel : LocationViewModel = LocationViewModelImpl()
-            viewModel.saveUserCurrentLocation(location: appDelegate.myLocation!)
+            appDelegate.updateUserLocationToLocalDB(loc: loc)
         }
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }

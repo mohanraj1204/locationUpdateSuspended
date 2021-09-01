@@ -134,11 +134,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appDelegate?.locationManager?.startMonitoring(for: geofenceRegion)
     }
 
+    func updateUserLocationToLocalDB(loc : CLLocation){
+        self.createRegion(location: loc)
+        let viewModel : LocationViewModel = LocationViewModelImpl()
+        viewModel.saveUserCurrentLocation(location: self.myLocation!)
+        self.scheduleLocalNotification(alert: "testing testing")
+    }
+    
+    
+    func scheduleLocalNotification(alert:String) {
+        let content = UNMutableNotificationContent()
+        let requestIdentifier = UUID.init().uuidString
+        
+        content.badge = 0
+        content.title = "Location Update"
+        content.body = alert
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 1.0, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { (error:Error?) in
+            
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+            }
+            print("Notification Register Success")
+        }
+    }
 }
 
 
 extension AppDelegate: CLLocationManagerDelegate {
-    
+
     //MARK:- LocationManager Delegates
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
@@ -149,6 +177,11 @@ extension AppDelegate: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         myLocation = location
+        if !(UIApplication.shared.applicationState == .active) {
+            if let loc = myLocation{
+                self.updateUserLocationToLocalDB(loc: loc)
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
@@ -178,8 +211,8 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         // customize your notification content
         let content = UNMutableNotificationContent()
-        content.title = "Awesome title"
-        content.body = "Well-crafted body message"
+        content.title = "Doodleblue"
+        content.body = "Hello your location is getting tracked"
         content.sound = UNNotificationSound.default
         
         // when the notification will be triggered
