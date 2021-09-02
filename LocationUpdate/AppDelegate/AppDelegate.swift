@@ -73,6 +73,7 @@ extension AppDelegate {
             locationManager = CLLocationManager()
         }//saran
 
+        locationManager?.showsBackgroundLocationIndicator = true
         locationManager?.delegate = self
         locationManager?.distanceFilter = 10
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
@@ -81,6 +82,7 @@ extension AppDelegate {
     }
     
     func handleLocationMangerWhenAppIsLaunched(){
+        locationManager?.showsBackgroundLocationIndicator = true
         locationManager?.delegate = self
         locationManager?.distanceFilter = 10
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
