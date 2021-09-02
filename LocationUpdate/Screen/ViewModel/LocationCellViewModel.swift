@@ -35,7 +35,7 @@ extension LocationListCelViewModelImpl : LocationListCellViewModel {
     }
     var time : String  {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy  hh:mm a"
+        dateFormatter.dateFormat = "dd/MM/yyyy  hh:mm:ss a"
         let dateInString = dateFormatter.string(from: (obj.time ?? Date()) as Date)
         return dateInString
     }

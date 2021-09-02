@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 protocol LocationViewModel {
+    var  title : String {get}
     var  locatioListCount : Int {get}
     func cellViewModelForLocationList(at index: Int) -> LocationListCellViewModel?
     func getLocationListLocalDB(sucess: ()->Void, failed: ()->Void)
@@ -23,7 +24,9 @@ class LocationViewModelImpl {
 
 
 extension LocationViewModelImpl : LocationViewModel {
-    
+    var title : String {
+        return "Location Tracker"
+    }
     var locatioListCount: Int {
         return arrLocationList?.count ?? 0
     }

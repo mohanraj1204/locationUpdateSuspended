@@ -26,7 +26,7 @@ class LocationListVC: UIViewController {
 
 extension LocationListVC {
     private func initialSetup() {
-        self.title = "Your Recent Location"
+        self.title = viewModel.title
         self.registerTblVwCell();
         self.addNotificationObserver()
         self.loadData()
