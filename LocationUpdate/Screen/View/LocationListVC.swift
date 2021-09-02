@@ -44,8 +44,8 @@ extension LocationListVC {
     }
     
     private func loadData(){
-        viewModel.getLocationListLocalDB {
-            self.tblVw.reloadData()
+        viewModel.getLocationListLocalDB { [weak self] in
+            self?.tblVw.reloadData()
         } failed: {
             print("Failed")
         }

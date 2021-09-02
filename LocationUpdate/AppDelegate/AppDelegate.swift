@@ -67,21 +67,17 @@ extension AppDelegate {
     func handleLocationManagerWhenAppIsTerminated(){
         if locationManager == nil {
             locationManager = CLLocationManager()
-            locationManager?.delegate = self
-            locationManager?.distanceFilter = 10
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager?.allowsBackgroundLocationUpdates = true
-            locationManager?.startUpdatingLocation()
         } else {
             print("Terminated location manager found")
             locationManager = nil
             locationManager = CLLocationManager()
-            locationManager?.delegate = self
-            locationManager?.distanceFilter = 10
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager?.allowsBackgroundLocationUpdates = true
-            locationManager?.startUpdatingLocation()
-        }
+        }//saran
+
+        locationManager?.delegate = self
+        locationManager?.distanceFilter = 10
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.startUpdatingLocation()
     }
     
     func handleLocationMangerWhenAppIsLaunched(){
@@ -112,7 +108,6 @@ extension AppDelegate {
                 print("Permission not granted")
             }
         }
-
     }
     
     func createRegion(location : CLLocation){
