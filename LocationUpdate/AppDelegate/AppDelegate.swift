@@ -135,7 +135,7 @@ extension AppDelegate {
         self.createRegion(location: loc)
         let viewModel : LocationViewModel = LocationViewModelImpl()
         viewModel.saveUserCurrentLocation(location: self.myLocation!)
-        self.scheduleLocalNotification(alert: "testing testing")
+            //self.scheduleLocalNotification(alert: "testing testing")
     }
     
     
